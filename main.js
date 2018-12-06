@@ -40,7 +40,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _contact_contact_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./contact/contact.component */ "./src/app/contact/contact.component.ts");
 /* harmony import */ var _project_project_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./project/project.component */ "./src/app/project/project.component.ts");
 /* harmony import */ var _skillpercent_skillpercent_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./skillpercent/skillpercent.component */ "./src/app/skillpercent/skillpercent.component.ts");
-/* harmony import */ var _contact_card_contact_card_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./contact-card/contact-card.component */ "./src/app/contact-card/contact-card.component.ts");
+/* harmony import */ var _project_timeline_project_timeline_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./project-timeline/project-timeline.component */ "./src/app/project-timeline/project-timeline.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -73,7 +73,7 @@ var routes = [
         path: 'skillpercent', component: _skillpercent_skillpercent_component__WEBPACK_IMPORTED_MODULE_6__["SkillpercentComponent"], data: { animation: 'skillpercent' }
     },
     {
-        path: 'timeline', component: _contact_card_contact_card_component__WEBPACK_IMPORTED_MODULE_7__["ContactCardComponent"], data: { animation: 'contactcard' }
+        path: 'timeline', component: _project_timeline_project_timeline_component__WEBPACK_IMPORTED_MODULE_7__["ProjectTimelineComponent"], data: { animation: 'projecttimeline' }
     },
     { path: '**', redirectTo: '/' },
 ];
@@ -129,17 +129,30 @@ module.exports = ".logo {\n  font-size: 2rem;\n  -webkit-animation: 1s ease-in-o
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(router) {
+        this.router = router;
+        this.router.events.subscribe(function (event) {
+            if (event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
+                window.ga('set', 'page', event.urlAfterRedirects);
+                window.ga('send', 'pageview');
+            }
+        });
     }
     AppComponent.prototype.triggerAnimation = function (outlet) {
         return outlet.activatedRouteData.animation || null;
@@ -150,32 +163,33 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")],
             animations: [
-                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["trigger"])('routerTransition', [
-                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["transition"])('* => *', [
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["query"])(':enter, :leave', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ position: 'fixed', width: '100%' }), {
+                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["trigger"])('routerTransition', [
+                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["transition"])('* => *', [
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["query"])(':enter, :leave', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ position: 'fixed', width: '100%' }), {
                             optional: true
                         }),
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["query"])(':enter', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateX(100%)', opacity: 0 }), {
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["query"])(':enter', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateX(100%)', opacity: 0 }), {
                             optional: true
                         }),
-                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["sequence"])([
-                            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["group"])([
-                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["query"])('@*, :leave', [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animateChild"])()], { optional: true }),
-                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["query"])(':leave', [
-                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateX(0%)' }),
-                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('0.8s ease-in-out', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateX(-100%)', opacity: 0 }))
+                        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["sequence"])([
+                            Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["group"])([
+                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["query"])('@*, :leave', [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animateChild"])()], { optional: true }),
+                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["query"])(':leave', [
+                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateX(0%)' }),
+                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.8s ease-in-out', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateX(-100%)', opacity: 0 }))
                                 ], { optional: true }),
-                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["query"])(':enter', [
-                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateX(100%)', opacity: 0 }),
-                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('0.8s ease-in-out', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateX(0%)', opacity: 1 }))
+                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["query"])(':enter', [
+                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateX(100%)', opacity: 0 }),
+                                    Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animate"])('0.8s ease-in-out', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["style"])({ transform: 'translateX(0%)', opacity: 1 }))
                                 ], { optional: true }),
-                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["query"])('@*, :enter', [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animateChild"])()], { optional: true })
+                                Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["query"])('@*, :enter', [Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["animateChild"])()], { optional: true })
                             ])
                         ])
                     ])
                 ])
             ]
-        })
+        }),
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -211,7 +225,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _footer_footer_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./footer/footer.component */ "./src/app/footer/footer.component.ts");
 /* harmony import */ var _skillpercent_skillpercent_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./skillpercent/skillpercent.component */ "./src/app/skillpercent/skillpercent.component.ts");
-/* harmony import */ var _contact_card_contact_card_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./contact-card/contact-card.component */ "./src/app/contact-card/contact-card.component.ts");
+/* harmony import */ var _project_timeline_project_timeline_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./project-timeline/project-timeline.component */ "./src/app/project-timeline/project-timeline.component.ts");
 // import { TagsService } from './services/tags.service';
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -254,7 +268,7 @@ var AppModule = /** @class */ (function () {
                 _header_header_component__WEBPACK_IMPORTED_MODULE_14__["HeaderComponent"],
                 _footer_footer_component__WEBPACK_IMPORTED_MODULE_15__["FooterComponent"],
                 _skillpercent_skillpercent_component__WEBPACK_IMPORTED_MODULE_16__["SkillpercentComponent"],
-                _contact_card_contact_card_component__WEBPACK_IMPORTED_MODULE_17__["ContactCardComponent"]
+                _project_timeline_project_timeline_component__WEBPACK_IMPORTED_MODULE_17__["ProjectTimelineComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -333,69 +347,6 @@ var BackButtonComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], BackButtonComponent);
     return BackButtonComponent;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/contact-card/contact-card.component.html":
-/*!**********************************************************!*\
-  !*** ./src/app/contact-card/contact-card.component.html ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"portfolio-bg\">\n<div class=\"project-container\">\n<div class=\"timeline\">\n    <div class=\"container left\">\n      <div class=\"content\">\n        <h2>2018</h2>\n        <p>Currently, I am working as a Software Automation Developer for one of the top insurance client. Working with Ruby, Appium. Also I am playing around Angular, NodeJs, MongoDB, Kubernetes.</p>\n      </div>\n    </div>\n    <div class=\"container right\">\n      <div class=\"content\">\n        <h2>2017</h2>\n        <p>Worked on the product XfinityMobile launched by top telecom client, build web automation framework in Ruby, Capybara, Jenkins, Saucelabs etc. Also with Java and Selenium and Rest APIs for end to end testing. </p>\n      </div>\n    </div>\n    <div class=\"container left\">\n      <div class=\"content\">\n        <h2>2015-2016</h2>\n        <p>For more than an year, worked on entertainment mobile app as automation developer, mostly used Rest APIs(Python), Ruby, Calabash, Jenkins, mobile platforms (iOS/Android) </p>\n      </div>\n    </div>\n    <!-- <div class=\"container right\">\n      <div class=\"content\">\n        <h2>2015</h2>\n        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>\n      </div>\n    </div> -->\n    <div class=\"container right\">\n      <div class=\"content\">\n        <h2>2014</h2>\n        <p>Build the first automation frameowrk in Java, selenium, Appium and cucumber features. Appium version was 1.1.0 then ☺ </p>\n      </div>\n    </div>\n    <div class=\"container left\">\n      <div class=\"content\">\n        <h2>2012-2013</h2>\n        <p>Worked as a Software Developer, and worked on technologies Java/J2EE (Struts, Hibernate, Oracle, WebServices, GWT).</p>\n      </div>\n    </div>\n    <!-- <div class=\"container right\">\n        <div class=\"content\">\n          <h2>2012</h2>\n          <p></p>\n        </div>\n    </div> -->\n    <div class=\"container right\">\n        <div class=\"content\">\n          <h2>2010-2011</h2>\n          <p>Explored JSF, Oracle ADF framework with Weblogic, in developing JSF pages for web application and binding with database and services. Worked on validating the data and type of users.</p>\n        </div>\n    </div>\n    <!-- <div class=\"container left\">\n        <div class=\"content\">\n          <h2>2010</h2>\n          <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>\n        </div>\n    </div> -->\n    <div class=\"container left\">\n        <div class=\"content\">\n          <h2>2009</h2>\n          <p>Worked for production server maintainnence and explored Unix, Shell script, Cron, logging, and worked on building internal tools to ease of the job of server health check.</p>\n        </div>\n    </div>\n    <div class=\"container right\">\n        <div class=\"content\">\n          <h2>2007-2008</h2>\n          <p>My first assignment where I learned Java and Advanced Java patterns and J2EE technologies like EJBs etc. Worked on re-developing the JSP pages and write new Oracle procedures.</p>\n        </div>\n    </div>\n  </div>\n</div>\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/contact-card/contact-card.component.scss":
-/*!**********************************************************!*\
-  !*** ./src/app/contact-card/contact-card.component.scss ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = ".portfolio-bg {\n  min-height: 100vh;\n  min-width: 100vw;\n  position: absolute;\n  overflow: hidden;\n  display: inline-block; }\n\n.project-container {\n  width: 100%;\n  flex-wrap: wrap;\n  align-items: center;\n  transition: all 0.5s ease-in-out;\n  padding-bottom: 0rem; }\n\n.timeline {\n  position: relative;\n  max-width: 1200px;\n  margin: 0 auto; }\n\n/* The actual timeline (the vertical ruler) */\n\n.timeline::after {\n  content: '';\n  position: absolute;\n  width: 6px;\n  background-color: white;\n  top: 0;\n  bottom: 0;\n  left: 50%;\n  margin-left: -3px;\n  overflow: hidden; }\n\n/* Container around content */\n\n.container {\n  padding: 10px 40px;\n  position: relative;\n  background-color: inherit;\n  width: 50%; }\n\n/* The circles on the timeline */\n\n.container::after {\n  content: '';\n  position: absolute;\n  width: 25px;\n  height: 25px;\n  right: -17px;\n  background-color: white;\n  border: 4px solid red;\n  top: 15px;\n  border-radius: 50%;\n  z-index: 1; }\n\n/* Place the container to the left */\n\n.left {\n  left: 0; }\n\n/* Place the container to the right */\n\n.right {\n  left: 50%; }\n\n/* Add arrows to the left container (pointing right) */\n\n.left::before {\n  content: \" \";\n  height: 0;\n  position: absolute;\n  top: 22px;\n  width: 0;\n  z-index: 1;\n  right: 30px;\n  border: medium solid white;\n  border-width: 10px 0 10px 10px;\n  border-color: transparent transparent transparent white; }\n\n/* Add arrows to the right container (pointing left) */\n\n.right::before {\n  content: \" \";\n  height: 0;\n  position: absolute;\n  top: 22px;\n  width: 0;\n  z-index: 1;\n  left: 30px;\n  border: medium solid white;\n  border-width: 10px 10px 10px 0;\n  border-color: transparent white transparent transparent; }\n\n/* Fix the circle for containers on the right side */\n\n.right::after {\n  left: -16px; }\n\n/* The actual content */\n\n.content {\n  padding: 20px 30px;\n  background-color: #e8eeea;\n  position: relative;\n  border-radius: 6px;\n  color: #492727;\n  font-family: 'Times New Roman', Times, serif;\n  box-shadow: 0.10rem 0.10rem 0.10rem 0.10rem red; }\n\n/* Media queries - Responsive timeline on screens less than 600px wide */\n\n@media screen and (max-width: 600px) {\n  /* Place the timelime to the left */\n  .timeline::after {\n    left: 31px; }\n  /* Full-width containers */\n  .container {\n    width: 100%;\n    padding-left: 70px;\n    padding-right: 25px; }\n  /* Make sure that all arrows are pointing leftwards */\n  .container::before {\n    left: 60px;\n    border: medium solid white;\n    border-width: 10px 10px 10px 0;\n    border-color: transparent white transparent transparent; }\n  /* Make sure all circles are at the same spot */\n  .left::after, .right::after {\n    left: 15px; }\n  /* Make all right containers behave like the left ones */\n  .right {\n    left: 0%; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zc2hhcm1hMDAxL0RvY3VtZW50cy9NeVByb2plY3RzL2FuZ3VsYXItcG9ydGZvbGlvL3NyYy9hcHAvY29udGFjdC1jYXJkL2NvbnRhY3QtY2FyZC5jb21wb25lbnQuc2NzcyIsIi9Vc2Vycy9zc2hhcm1hMDAxL0RvY3VtZW50cy9NeVByb2plY3RzL2FuZ3VsYXItcG9ydGZvbGlvL3NyYy9hcHAvZ2xvYmFsLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxrQkFBaUI7RUFDakIsaUJBQWdCO0VBQ2hCLG1CQUFrQjtFQUNsQixpQkFBZ0I7RUFDaEIsc0JBQXFCLEVBQ3RCOztBQUNIO0VBQ0ksWUFBVztFQUNYLGdCQUFlO0VBQ2Ysb0JBQW1CO0VBQ25CLGlDQUFnQztFQUNoQyxxQkFBb0IsRUFDckI7O0FBRUg7RUFDSSxtQkFBa0I7RUFDbEIsa0JBQWlCO0VBQ2pCLGVBQWMsRUFDakI7O0FBRUQsOENBQThDOztBQUM5QztFQUNJLFlBQVc7RUFDWCxtQkFBa0I7RUFDbEIsV0FBVTtFQUNWLHdCQUF1QjtFQUN2QixPQUFNO0VBQ04sVUFBUztFQUNULFVBQVM7RUFDVCxrQkFBaUI7RUFDakIsaUJBQWdCLEVBQ25COztBQUVELDhCQUE4Qjs7QUFDOUI7RUFDSSxtQkFBa0I7RUFDbEIsbUJBQWtCO0VBQ2xCLDBCQUF5QjtFQUN6QixXQUFVLEVBQ2I7O0FBRUQsaUNBQWlDOztBQUNqQztFQUNJLFlBQVc7RUFDWCxtQkFBa0I7RUFDbEIsWUFBVztFQUNYLGFBQVk7RUFDWixhQUFZO0VBQ1osd0JBQXVCO0VBQ3ZCLHNCQUFxQjtFQUNyQixVQUFTO0VBQ1QsbUJBQWtCO0VBQ2xCLFdBQVUsRUFDYjs7QUFFRCxxQ0FBcUM7O0FBQ3JDO0VBQ0ksUUFBTyxFQUNWOztBQUVELHNDQUFzQzs7QUFDdEM7RUFDSSxVQUFTLEVBQ1o7O0FBRUQsdURBQXVEOztBQUN2RDtFQUNJLGFBQVk7RUFDWixVQUFTO0VBQ1QsbUJBQWtCO0VBQ2xCLFVBQVM7RUFDVCxTQUFRO0VBQ1IsV0FBVTtFQUNWLFlBQVc7RUFDWCwyQkFBMEI7RUFDMUIsK0JBQThCO0VBQzlCLHdEQUF1RCxFQUMxRDs7QUFFRCx1REFBdUQ7O0FBQ3ZEO0VBQ0ksYUFBWTtFQUNaLFVBQVM7RUFDVCxtQkFBa0I7RUFDbEIsVUFBUztFQUNULFNBQVE7RUFDUixXQUFVO0VBQ1YsV0FBVTtFQUNWLDJCQUEwQjtFQUMxQiwrQkFBOEI7RUFDOUIsd0RBQXVELEVBQzFEOztBQUVELHFEQUFxRDs7QUFDckQ7RUFDSSxZQUFXLEVBQ2Q7O0FBRUQsd0JBQXdCOztBQUN4QjtFQUNJLG1CQUFrQjtFQUNsQiwwQkNoR2U7RURpR2YsbUJBQWtCO0VBQ2xCLG1CQUFrQjtFQUNsQixlQ2xHd0I7RURtR3hCLDZDQUE0QztFQUM1QyxnREFBK0MsRUFDbEQ7O0FBRUQseUVBQXlFOztBQUN6RTtFQUNFLG9DQUFvQztFQUNwQztJQUNFLFdBQVUsRUFDWDtFQUVELDJCQUEyQjtFQUMzQjtJQUNFLFlBQVc7SUFDWCxtQkFBa0I7SUFDbEIsb0JBQW1CLEVBQ3BCO0VBRUQsc0RBQXNEO0VBQ3REO0lBQ0UsV0FBVTtJQUNWLDJCQUEwQjtJQUMxQiwrQkFBOEI7SUFDOUIsd0RBQXVELEVBQ3hEO0VBRUQsZ0RBQWdEO0VBQ2hEO0lBQ0UsV0FBVSxFQUNYO0VBRUQseURBQXlEO0VBQ3pEO0lBQ0UsU0FBUSxFQUNULEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jb250YWN0LWNhcmQvY29udGFjdC1jYXJkLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCAnLi4vZ2xvYmFsLnNjc3MnO1xuXG4ucG9ydGZvbGlvLWJnIHtcbiAgICBtaW4taGVpZ2h0OiAxMDB2aDtcbiAgICBtaW4td2lkdGg6IDEwMHZ3O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuLnByb2plY3QtY29udGFpbmVyIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBmbGV4LXdyYXA6IHdyYXA7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICB0cmFuc2l0aW9uOiBhbGwgMC41cyBlYXNlLWluLW91dDtcbiAgICBwYWRkaW5nLWJvdHRvbTogMHJlbTtcbiAgfVxuXG4udGltZWxpbmUge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBtYXgtd2lkdGg6IDEyMDBweDtcbiAgICBtYXJnaW46IDAgYXV0bztcbn1cblxuLyogVGhlIGFjdHVhbCB0aW1lbGluZSAodGhlIHZlcnRpY2FsIHJ1bGVyKSAqL1xuLnRpbWVsaW5lOjphZnRlciB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiA2cHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgdG9wOiAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBsZWZ0OiA1MCU7XG4gICAgbWFyZ2luLWxlZnQ6IC0zcHg7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLyogQ29udGFpbmVyIGFyb3VuZCBjb250ZW50ICovXG4uY29udGFpbmVyIHtcbiAgICBwYWRkaW5nOiAxMHB4IDQwcHg7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIGJhY2tncm91bmQtY29sb3I6IGluaGVyaXQ7XG4gICAgd2lkdGg6IDUwJTtcbn1cblxuLyogVGhlIGNpcmNsZXMgb24gdGhlIHRpbWVsaW5lICovXG4uY29udGFpbmVyOjphZnRlciB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiAyNXB4O1xuICAgIGhlaWdodDogMjVweDtcbiAgICByaWdodDogLTE3cHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyOiA0cHggc29saWQgcmVkO1xuICAgIHRvcDogMTVweDtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgei1pbmRleDogMTtcbn1cblxuLyogUGxhY2UgdGhlIGNvbnRhaW5lciB0byB0aGUgbGVmdCAqL1xuLmxlZnQge1xuICAgIGxlZnQ6IDA7XG59XG5cbi8qIFBsYWNlIHRoZSBjb250YWluZXIgdG8gdGhlIHJpZ2h0ICovXG4ucmlnaHQge1xuICAgIGxlZnQ6IDUwJTtcbn1cblxuLyogQWRkIGFycm93cyB0byB0aGUgbGVmdCBjb250YWluZXIgKHBvaW50aW5nIHJpZ2h0KSAqL1xuLmxlZnQ6OmJlZm9yZSB7XG4gICAgY29udGVudDogXCIgXCI7XG4gICAgaGVpZ2h0OiAwO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDIycHg7XG4gICAgd2lkdGg6IDA7XG4gICAgei1pbmRleDogMTtcbiAgICByaWdodDogMzBweDtcbiAgICBib3JkZXI6IG1lZGl1bSBzb2xpZCB3aGl0ZTtcbiAgICBib3JkZXItd2lkdGg6IDEwcHggMCAxMHB4IDEwcHg7XG4gICAgYm9yZGVyLWNvbG9yOiB0cmFuc3BhcmVudCB0cmFuc3BhcmVudCB0cmFuc3BhcmVudCB3aGl0ZTtcbn1cblxuLyogQWRkIGFycm93cyB0byB0aGUgcmlnaHQgY29udGFpbmVyIChwb2ludGluZyBsZWZ0KSAqL1xuLnJpZ2h0OjpiZWZvcmUge1xuICAgIGNvbnRlbnQ6IFwiIFwiO1xuICAgIGhlaWdodDogMDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAyMnB4O1xuICAgIHdpZHRoOiAwO1xuICAgIHotaW5kZXg6IDE7XG4gICAgbGVmdDogMzBweDtcbiAgICBib3JkZXI6IG1lZGl1bSBzb2xpZCB3aGl0ZTtcbiAgICBib3JkZXItd2lkdGg6IDEwcHggMTBweCAxMHB4IDA7XG4gICAgYm9yZGVyLWNvbG9yOiB0cmFuc3BhcmVudCB3aGl0ZSB0cmFuc3BhcmVudCB0cmFuc3BhcmVudDtcbn1cblxuLyogRml4IHRoZSBjaXJjbGUgZm9yIGNvbnRhaW5lcnMgb24gdGhlIHJpZ2h0IHNpZGUgKi9cbi5yaWdodDo6YWZ0ZXIge1xuICAgIGxlZnQ6IC0xNnB4O1xufVxuXG4vKiBUaGUgYWN0dWFsIGNvbnRlbnQgKi9cbi5jb250ZW50IHtcbiAgICBwYWRkaW5nOiAyMHB4IDMwcHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogJG9mZi13aGl0ZTtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgIGNvbG9yOiAkdGV4dC1jb2xvcjtcbiAgICBmb250LWZhbWlseTogJ1RpbWVzIE5ldyBSb21hbicsIFRpbWVzLCBzZXJpZjtcbiAgICBib3gtc2hhZG93OiAwLjEwcmVtIDAuMTByZW0gMC4xMHJlbSAwLjEwcmVtIHJlZDtcbn1cblxuLyogTWVkaWEgcXVlcmllcyAtIFJlc3BvbnNpdmUgdGltZWxpbmUgb24gc2NyZWVucyBsZXNzIHRoYW4gNjAwcHggd2lkZSAqL1xuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgLyogUGxhY2UgdGhlIHRpbWVsaW1lIHRvIHRoZSBsZWZ0ICovXG4gIC50aW1lbGluZTo6YWZ0ZXIge1xuICAgIGxlZnQ6IDMxcHg7XG4gIH1cbiAgXG4gIC8qIEZ1bGwtd2lkdGggY29udGFpbmVycyAqL1xuICAuY29udGFpbmVyIHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBwYWRkaW5nLWxlZnQ6IDcwcHg7XG4gICAgcGFkZGluZy1yaWdodDogMjVweDtcbiAgfVxuICBcbiAgLyogTWFrZSBzdXJlIHRoYXQgYWxsIGFycm93cyBhcmUgcG9pbnRpbmcgbGVmdHdhcmRzICovXG4gIC5jb250YWluZXI6OmJlZm9yZSB7XG4gICAgbGVmdDogNjBweDtcbiAgICBib3JkZXI6IG1lZGl1bSBzb2xpZCB3aGl0ZTtcbiAgICBib3JkZXItd2lkdGg6IDEwcHggMTBweCAxMHB4IDA7XG4gICAgYm9yZGVyLWNvbG9yOiB0cmFuc3BhcmVudCB3aGl0ZSB0cmFuc3BhcmVudCB0cmFuc3BhcmVudDtcbiAgfVxuXG4gIC8qIE1ha2Ugc3VyZSBhbGwgY2lyY2xlcyBhcmUgYXQgdGhlIHNhbWUgc3BvdCAqL1xuICAubGVmdDo6YWZ0ZXIsIC5yaWdodDo6YWZ0ZXIge1xuICAgIGxlZnQ6IDE1cHg7XG4gIH1cbiAgXG4gIC8qIE1ha2UgYWxsIHJpZ2h0IGNvbnRhaW5lcnMgYmVoYXZlIGxpa2UgdGhlIGxlZnQgb25lcyAqL1xuICAucmlnaHQge1xuICAgIGxlZnQ6IDAlO1xuICB9XG59IiwiJGJnLWNvbG9yOiAjMDg1ZTcyO1xuLy8gIzE3YTU5ODtcbiRjb2xvcjE6ICNlNzRjM2M7XG4kY29sb3IyOiAjZDJlMWRkO1xuJGNvbG9yMzogI2RiMzgxYjtcbiRncmVlbjogIzE3YTU5ODtcbi8vICR0ZXh0LWNvbG9yOiAjZmZmZmZmO1xuJGJsYWNrOiAjNTU1O1xuJG9mZi13aGl0ZTogI2U4ZWVlYTtcbiR0ZXh0LWNvbG9yOiByZ2IoNzMsIDM5LCAzOSk7XG4vLyAjNjk5O1xuJHdoaXRlOiAjZmZmO1xuJGNvbG9yNDogcmdiKDI0NywgMTY4LCAxNjgpO1xuJGNvbG9yNTogIzU0YTRhZjsiXX0= */"
-
-/***/ }),
-
-/***/ "./src/app/contact-card/contact-card.component.ts":
-/*!********************************************************!*\
-  !*** ./src/app/contact-card/contact-card.component.ts ***!
-  \********************************************************/
-/*! exports provided: ContactCardComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ContactCardComponent", function() { return ContactCardComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ContactCardComponent = /** @class */ (function () {
-    function ContactCardComponent() {
-    }
-    ContactCardComponent.prototype.ngOnInit = function () {
-    };
-    ContactCardComponent = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
-            selector: 'app-contact-card',
-            template: __webpack_require__(/*! ./contact-card.component.html */ "./src/app/contact-card/contact-card.component.html"),
-            styles: [__webpack_require__(/*! ./contact-card.component.scss */ "./src/app/contact-card/contact-card.component.scss")]
-        }),
-        __metadata("design:paramtypes", [])
-    ], ContactCardComponent);
-    return ContactCardComponent;
 }());
 
 
@@ -789,7 +740,7 @@ var FooterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<section class=\"portfolio-header\">\n    <div class=\"portfolio-selection__fixed\" >\n        <div class=\"navbar\">\n            <div class=\"side-nav-items\">\n                <h3 class=\"nav-item\">❀Swati Sharma❀</h3>\n            </div>\n            <div class=\"center-nav-items\">\n                <a [routerLink]=\"['/landing']\" class=\"nav-item\">Home</a>\n                <a [routerLink]=\"['/profiles']\" class=\"nav-item\" >About</a>\n                <a [routerLink]=\"['/projects']\" class=\"nav-item\">Projects</a>\n                <a [routerLink]=\"['/skillpercent']\" class=\"nav-item\">Skills</a>\n            </div>\n            <div class=\"right-nav-items\">\n                    <a class=\"social-icon\" href=\"https://github.com/swati001/swati001.github.io\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-github.png\" alt=\"github icon\">\n                    </a>\n                    <a class=\"social-icon\" href=\"https://www.linkedin.com/in/swati-sharma-aa423b89/\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-linkedin.png\" alt=\"linked icon\">\n                    </a>\n                    <a class=\"social-icon\" href=\"https://www.facebook.com/in/swati001/\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-facebook.png\" alt=\"facebook icon\">\n                    </a>\n                    <!-- <a class=\"social-icon\" href=\"https://www.facebook.com/in/swati001/\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-cv.png\" alt=\"facebook icon\">\n                    </a> -->\n            </div>\n        </div>\n    </div>\n</section>"
+module.exports = "\n<section class=\"portfolio-header\">\n    <div class=\"portfolio-selection__fixed\" >\n        <div class=\"navbar\">\n            <div class=\"side-nav-items\">\n                <h3 class=\"nav-item\">❀Swati Sharma❀</h3>\n            </div>\n            <div class=\"center-nav-items\">\n                <a [routerLink]=\"['/landing']\" class=\"nav-item\" (click)=\"sendEvent('Landing')\">Home</a>\n                <a [routerLink]=\"['/profiles']\" class=\"nav-item\" (click)=\"sendEvent('LandingProfile')\">About</a>\n                <a [routerLink]=\"['/projects']\" class=\"nav-item\" (click)=\"sendEvent('LandingProjects')\">Projects</a>\n                <a [routerLink]=\"['/skillpercent']\" class=\"nav-item\" (click)=\"sendEvent('LandingSkills')\">Skills</a>\n            </div>\n            <div class=\"right-nav-items\">\n                    <a class=\"social-icon\" href=\"https://github.com/swati001/swati001.github.io\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-github.png\" alt=\"github icon\">\n                    </a>\n                    <a class=\"social-icon\" href=\"https://www.linkedin.com/in/swati-sharma-aa423b89/\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-linkedin.png\" alt=\"linked icon\">\n                    </a>\n                    <a class=\"social-icon\" href=\"https://www.facebook.com/in/swati001/\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-facebook.png\" alt=\"facebook icon\">\n                    </a>\n                    <!-- <a class=\"social-icon\" href=\"https://www.facebook.com/in/swati001/\" target=\"_blank\">\n                        <img src=\"assets/assert/icons/header-cv.png\" alt=\"facebook icon\">\n                    </a> -->\n            </div>\n        </div>\n    </div>\n</section>"
 
 /***/ }),
 
@@ -828,6 +779,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var HeaderComponent = /** @class */ (function () {
     function HeaderComponent() {
         this.setFixedPostion = false;
+        this.sendEvent = function (action) {
+            window.ga('send', 'event', {
+                eventCategory: action,
+                eventLabel: action,
+                eventAction: action,
+                eventValue: 10
+            });
+        };
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
@@ -873,7 +832,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"overlay\"></div>\n<div class=\"root-container\">\n  <br><br>\n  <div class=\"container\">\n      <app-profile-pic class=\"profile-image\"></app-profile-pic>\n      <h4 class=\"short-bio\">Software Developer | Mobile/Web Application Automation Tester | Devops Engineer </h4>\n      <q class=\"quote\">Hi! I am Swati Sharma,\n      I ❤ programming and have passion to learn new technologies. </q>\n      <q class=\"quote\">I like to explore new skills in a way of self-learning.</q>\n      <div class=\"strip\"></div>\n      <br><br><br>\n      <span (click)=\"onContactClick()\" (mouseover)=\"startLink1Animation = false\" [ngClass]=\"{'link-animation':startLink1Animation}\">\n        <button class=\"special-btn\">\n        <span>\n          Contact Me\n        </span>\n        </button>\n      </span>\n  </div>\n</div>  "
+module.exports = "\n<div class=\"overlay\"></div>\n<div class=\"root-container\">\n  <br><br>\n  <div class=\"container\">\n      <app-profile-pic class=\"profile-image\"></app-profile-pic>\n      <h4 class=\"short-bio\">Software Developer | Mobile/Web Application Automation Tester | Devops Engineer </h4>\n      <q class=\"quote\">Hi! I am Swati Sharma,\n      I ❤ programming and have passion to learn new technologies. </q>\n      <q class=\"quote\">I like to explore new skills in a way of self-learning.</q>\n      <div class=\"strip\"></div>\n      <br><br><br>\n      <span (click)=\"onContactClick();sendEvent('ContactMe')\" (mouseover)=\"startLink1Animation = false\" [ngClass]=\"{'link-animation':startLink1Animation}\">\n        <button class=\"special-btn\">\n        <span>\n          Contact Me\n        </span>\n        </button>\n      </span>\n  </div>\n</div>  "
 
 /***/ }),
 
@@ -918,6 +877,14 @@ var LandingComponent = /** @class */ (function () {
         this.startLink1Animation = false;
         this.startLink2Animation = false;
         this.startLink3Animation = false;
+        this.sendEvent = function (action) {
+            window.ga('send', 'event', {
+                eventCategory: action,
+                eventLabel: action,
+                eventAction: action,
+                eventValue: 10
+            });
+        };
     }
     LandingComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1156,7 +1123,7 @@ var ProfileService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "  <span class=\"overlay\"></span>\n  <div class=\"container\">\n    <section class=\"side1\">\n      <div class=\"text-container\">\n          <h4 class=\"text-header\">A little bit about myself ❀❀</h4>\n        <p>\n          I have 10 years of experience in software engineering. I have worked as a software developer for different clients\n          and also gained experience in software automation testing. I started programming with Java and J2EE in 2008 and I learned about different tools\n          while working on different projects. \n        </p>\n          <p>\n          I jumped into software automation in 2014 for building a frameowrk in Java. I gained experience in Ruby, AngularJS, node.js. I love working on new skills and technologies and resolving problems.\n          In Software automation field, I got opportunity to work on Capybara, Calabash, Appium, Selenium, Cucumber.\n          I like to build frameowrks and tools to help teams and to gain experience with software architecture.\n        </p>\n        <br>\n        <h4>Highlights:</h4>\n         \n            <ul>\n              <li> Built a project dashboard using Struts/JSP for my first project, which checks the status of servers using cron jobs and triggers the mail. </li>\n              <li> Built a crawler script in Java to check each and every link of Web Application and stores the status in desired format.</li>\n              <li> Built ruby custom gems for different teams to use</li>\n            </ul>\n        \n        <br>\n        <p>\n          Apart from programming, I like to play badminton, baking and watch documentries about universe/planets.\n        </p>\n      </div>\n    </section>\n    <section class=\"side2\">\n      <div class=\"skill-container\">\n        <h4 class=\"skill-header\">\n            My core skills and strengths<a [routerLink]=\"['/skillpercent']\" class=\"percent\">♥♥☺♥♥</a>\n        </h4>\n        <div *ngFor=\"let profile of profiles\">\n          <h4 class=\"skill-type\">{{profile.type}}</h4>\n          <h4 class=\"skill-names\">{{profile.name.join(', ')}}</h4>\n        </div>\n      </div>\n      \n    </section>\n  </div> "
+module.exports = "  <span class=\"overlay\"></span>\n  <div class=\"container\">\n    <section class=\"side1\">\n      <div class=\"text-container\">\n          <h4 class=\"text-header\">A little bit about myself ❀❀</h4>\n        <p>\n          I have 10 years of experience in software engineering. I have worked as a software developer for different clients\n          and also gained experience in software automation testing. I started programming with Java and J2EE in 2008 and I learned about different tools\n          while working on different projects. \n        </p>\n          <p>\n          I jumped into software automation in 2014 for building a frameowrk in Java. I gained experience in Ruby, AngularJS, node.js. I love working on new skills and technologies and resolving problems.\n          In Software automation field, I got opportunity to work on Capybara, Calabash, Appium, Selenium, Cucumber.\n          I like to build frameowrks and tools to help teams and to gain experience with software architecture.\n        </p>\n        <br>\n        <h4>Highlights:</h4>\n         \n            <ul>\n              <li> Built a project dashboard using Struts/JSP for my first project, which checks the status of servers using cron jobs and triggers the mail. </li>\n              <li> Built a crawler script in Java to check each and every link of Web Application and stores the status in desired format.</li>\n              <li> Built ruby custom gems for different teams to use</li>\n            </ul>\n        \n        <br>\n        <p>\n          Apart from programming, I like to play badminton, baking and watch documentries about universe/planets.\n        </p>\n      </div>\n    </section>\n    <section class=\"side2\">\n      <div class=\"skill-container\">\n        <h4 class=\"skill-header\">\n            My core skills and strengths<a [routerLink]=\"['/skillpercent']\" class=\"percent\" (click)=\"sendEvent('About-Skills')\">♥♥☺♥♥</a>\n        </h4>\n        <div *ngFor=\"let profile of profiles\">\n          <h4 class=\"skill-type\">{{profile.type}}</h4>\n          <h4 class=\"skill-names\">{{profile.name.join(', ')}}</h4>\n        </div>\n      </div>\n      \n    </section>\n  </div> "
 
 /***/ }),
 
@@ -1200,6 +1167,14 @@ var ProfileComponent = /** @class */ (function () {
     function ProfileComponent(profileService, router) {
         this.profileService = profileService;
         this.router = router;
+        this.sendEvent = function (action) {
+            window.ga('send', 'event', {
+                eventCategory: action,
+                eventLabel: action,
+                eventAction: action,
+                eventValue: 10
+            });
+        };
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.profiles = this.profileService.getSkills();
@@ -1315,6 +1290,69 @@ var ALL_PROJECT_DATA = getAllProject();
 
 /***/ }),
 
+/***/ "./src/app/project-timeline/project-timeline.component.html":
+/*!******************************************************************!*\
+  !*** ./src/app/project-timeline/project-timeline.component.html ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"portfolio-bg\">\n<div class=\"project-container\">\n  <div id=\"overflowTest\">\n<div class=\"timeline\">\n    <div class=\"container left\">\n      <div class=\"content\">\n        <h2>2018</h2>\n        <p>Currently, I am working as a Software Automation Developer for one of the top insurance client. Working with Ruby, Appium. Also I am playing around Angular, NodeJs, MongoDB, Kubernetes.</p>\n      </div>\n    </div>\n    <div class=\"container right\">\n      <div class=\"content\">\n        <h2>2017</h2><h4> Xfinity Mobile</h4>\n        <p>Worked on the product XfinityMobile launched by top telecom client, build web automation framework in Ruby, Capybara, Jenkins, Saucelabs etc. Also with Java and Selenium and Rest APIs for end to end testing. </p>\n      </div>\n    </div>\n    <div class=\"container left\">\n      <div class=\"content\">\n        <h2>2015-2016</h2><h4> Xfinity TV</h4>\n        <p>For more than an year, worked on entertainment mobile app , as automation developer, mostly used Rest APIs(Python), Ruby, Calabash, Jenkins, mobile platforms (iOS/Android) </p>\n      </div>\n    </div>\n    <!-- <div class=\"container right\">\n      <div class=\"content\">\n        <h2>2015</h2>\n        <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>\n      </div>\n    </div> -->\n    <div class=\"container right\">\n      <div class=\"content\">\n        <h2>2014</h2><h4> Lowes Mobile App</h4>\n        <p>Build the first automation frameowrk for Lowes' Mobile App in Java, selenium, Appium and cucumber features. Appium version was 1.1.0 then ☺ </p>\n      </div>\n    </div>\n    <div class=\"container left\">\n      <div class=\"content\">\n        <h2>2012-2013</h2><h4> ICA</h4>\n        <p>Worked as a Software Developer for ICA, and worked on technologies Java/J2EE (Struts, Hibernate, Oracle, WebServices, GWT).</p>\n      </div>\n    </div>\n    <!-- <div class=\"container right\">\n        <div class=\"content\">\n          <h2>2012</h2>\n          <p></p>\n        </div>\n    </div> -->\n    <div class=\"container right\">\n        <div class=\"content\">\n          <h2>2010-2011</h2><h4> Proquest Web App</h4>\n          <p>Explored JSF, Oracle ADF framework with Weblogic in Proquest, in developing JSF pages for web application and binding with database and services. Worked on validating the data and type of users.</p>\n        </div>\n    </div>\n    <!-- <div class=\"container left\">\n        <div class=\"content\">\n          <h2>2010</h2>\n          <p>Lorem ipsum dolor sit amet, quo ei simul congue exerci, ad nec admodum perfecto mnesarchum, vim ea mazim fierent detracto. Ea quis iuvaret expetendis his, te elit voluptua dignissim per, habeo iusto primis ea eam.</p>\n        </div>\n    </div> -->\n    <div class=\"container left\">\n        <div class=\"content\">\n          <h2>2009</h2><h4> Met</h4>\n          <p>Worked for production server maintainnence and explored Unix, Shell script, Cron, logging, and worked on building internal tools to ease of the job of server health check.</p>\n        </div>\n    </div>\n    <div class=\"container right\">\n        <div class=\"content\">\n          <h2>2007-2008</h2><h4> Exclaim Web App</h4>\n          <p>My first assignment where I learned Java and Advanced Java patterns and J2EE technologies like EJBs etc. Worked on re-developing the JSP pages and write new Oracle procedures.</p>\n        </div>\n    </div>\n  </div>\n</div>\n</div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/project-timeline/project-timeline.component.scss":
+/*!******************************************************************!*\
+  !*** ./src/app/project-timeline/project-timeline.component.scss ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".portfolio-bg {\n  min-height: 100vh;\n  min-width: 100vw;\n  position: absolute;\n  overflow: hidden;\n  display: inline-block; }\n\n.project-container {\n  width: 100%;\n  flex-wrap: wrap;\n  align-items: center;\n  transition: all 0.5s ease-in-out;\n  padding-bottom: 0rem; }\n\n#overflowTest {\n  position: fixed;\n  margin-top: 30px;\n  padding: 15px;\n  width: 90%;\n  height: 100%;\n  overflow: scroll; }\n\n.timeline {\n  position: relative;\n  max-width: 1200px;\n  margin: 0 auto;\n  height: 200%; }\n\n/* The actual timeline (the vertical ruler) */\n\n.timeline::after {\n  content: '';\n  position: absolute;\n  width: 6px;\n  background-color: white;\n  top: 0;\n  bottom: 0;\n  left: 50%;\n  margin-left: -3px;\n  overflow: hidden; }\n\n/* Container around content */\n\n.container {\n  padding: 10px 40px;\n  position: relative;\n  background-color: inherit;\n  width: 50%; }\n\n/* The circles on the timeline */\n\n.container::after {\n  content: '';\n  position: absolute;\n  width: 25px;\n  height: 25px;\n  right: -17px;\n  background-color: white;\n  border: 4px solid red;\n  top: 15px;\n  border-radius: 50%;\n  z-index: 1; }\n\n/* Place the container to the left */\n\n.left {\n  left: 0; }\n\n/* Place the container to the right */\n\n.right {\n  left: 50%; }\n\n/* Add arrows to the left container (pointing right) */\n\n.left::before {\n  content: \" \";\n  height: 0;\n  position: absolute;\n  top: 22px;\n  width: 0;\n  z-index: 1;\n  right: 30px;\n  border: medium solid white;\n  border-width: 10px 0 10px 10px;\n  border-color: transparent transparent transparent white; }\n\n/* Add arrows to the right container (pointing left) */\n\n.right::before {\n  content: \" \";\n  height: 0;\n  position: absolute;\n  top: 22px;\n  width: 0;\n  z-index: 1;\n  left: 30px;\n  border: medium solid white;\n  border-width: 10px 10px 10px 0;\n  border-color: transparent white transparent transparent; }\n\n/* Fix the circle for containers on the right side */\n\n.right::after {\n  left: -16px; }\n\n/* The actual content */\n\n.content {\n  padding: 20px 30px;\n  background-color: #e8eeea;\n  position: relative;\n  border-radius: 6px;\n  color: #492727;\n  font-family: 'Times New Roman', Times, serif;\n  box-shadow: 0.10rem 0.10rem 0.10rem 0.10rem red; }\n\n/* Media queries - Responsive timeline on screens less than 600px wide */\n\n@media screen and (max-width: 600px) {\n  /* Place the timelime to the left */\n  #overflowTest {\n    position: fixed;\n    margin-top: 30px;\n    padding: 15px;\n    width: 90%;\n    height: 100%;\n    overflow: scroll; }\n  .timeline {\n    position: relative;\n    max-width: 1200px;\n    margin: 0 auto;\n    height: 220%; }\n  .timeline::after {\n    left: 31px; }\n  /* Full-width containers */\n  .container {\n    width: 100%;\n    padding-left: 70px;\n    padding-right: 25px; }\n  /* Make sure that all arrows are pointing leftwards */\n  .container::before {\n    left: 60px;\n    border: medium solid white;\n    border-width: 10px 10px 10px 0;\n    border-color: transparent white transparent transparent; }\n  /* Make sure all circles are at the same spot */\n  .left::after, .right::after {\n    left: 15px; }\n  /* Make all right containers behave like the left ones */\n  .right {\n    left: 0%; } }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9zc2hhcm1hMDAxL0RvY3VtZW50cy9NeVByb2plY3RzL2FuZ3VsYXItcG9ydGZvbGlvL3NyYy9hcHAvcHJvamVjdC10aW1lbGluZS9wcm9qZWN0LXRpbWVsaW5lLmNvbXBvbmVudC5zY3NzIiwiL1VzZXJzL3NzaGFybWEwMDEvRG9jdW1lbnRzL015UHJvamVjdHMvYW5ndWxhci1wb3J0Zm9saW8vc3JjL2FwcC9nbG9iYWwuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFFQTtFQUNJLGtCQUFpQjtFQUNqQixpQkFBZ0I7RUFDaEIsbUJBQWtCO0VBQ2xCLGlCQUFnQjtFQUNoQixzQkFBcUIsRUFDdEI7O0FBQ0g7RUFDSSxZQUFXO0VBQ1gsZ0JBQWU7RUFDZixvQkFBbUI7RUFDbkIsaUNBQWdDO0VBQ2hDLHFCQUFvQixFQUNyQjs7QUFDRDtFQUdFLGdCQUFlO0VBQ2YsaUJBQWdCO0VBQ2hCLGNBQWE7RUFDYixXQUFVO0VBQ1YsYUFBWTtFQUNaLGlCQUFnQixFQUVqQjs7QUFFSDtFQUNJLG1CQUFrQjtFQUNsQixrQkFBaUI7RUFDakIsZUFBYztFQUNkLGFBQVksRUFDZjs7QUFFRCw4Q0FBOEM7O0FBQzlDO0VBQ0ksWUFBVztFQUNYLG1CQUFrQjtFQUNsQixXQUFVO0VBQ1Ysd0JBQXVCO0VBQ3ZCLE9BQU07RUFDTixVQUFTO0VBQ1QsVUFBUztFQUNULGtCQUFpQjtFQUNqQixpQkFBZ0IsRUFDbkI7O0FBRUQsOEJBQThCOztBQUM5QjtFQUNJLG1CQUFrQjtFQUNsQixtQkFBa0I7RUFDbEIsMEJBQXlCO0VBQ3pCLFdBQVUsRUFDYjs7QUFFRCxpQ0FBaUM7O0FBQ2pDO0VBQ0ksWUFBVztFQUNYLG1CQUFrQjtFQUNsQixZQUFXO0VBQ1gsYUFBWTtFQUNaLGFBQVk7RUFDWix3QkFBdUI7RUFDdkIsc0JBQXFCO0VBQ3JCLFVBQVM7RUFDVCxtQkFBa0I7RUFDbEIsV0FBVSxFQUNiOztBQUVELHFDQUFxQzs7QUFDckM7RUFDSSxRQUFPLEVBQ1Y7O0FBRUQsc0NBQXNDOztBQUN0QztFQUNJLFVBQVMsRUFDWjs7QUFFRCx1REFBdUQ7O0FBQ3ZEO0VBQ0ksYUFBWTtFQUNaLFVBQVM7RUFDVCxtQkFBa0I7RUFDbEIsVUFBUztFQUNULFNBQVE7RUFDUixXQUFVO0VBQ1YsWUFBVztFQUNYLDJCQUEwQjtFQUMxQiwrQkFBOEI7RUFDOUIsd0RBQXVELEVBQzFEOztBQUVELHVEQUF1RDs7QUFDdkQ7RUFDSSxhQUFZO0VBQ1osVUFBUztFQUNULG1CQUFrQjtFQUNsQixVQUFTO0VBQ1QsU0FBUTtFQUNSLFdBQVU7RUFDVixXQUFVO0VBQ1YsMkJBQTBCO0VBQzFCLCtCQUE4QjtFQUM5Qix3REFBdUQsRUFDMUQ7O0FBRUQscURBQXFEOztBQUNyRDtFQUNJLFlBQVcsRUFDZDs7QUFFRCx3QkFBd0I7O0FBQ3hCO0VBQ0ksbUJBQWtCO0VBQ2xCLDBCQzVHZTtFRDZHZixtQkFBa0I7RUFDbEIsbUJBQWtCO0VBQ2xCLGVDOUd3QjtFRCtHeEIsNkNBQTRDO0VBQzVDLGdEQUErQyxFQUNsRDs7QUFFRCx5RUFBeUU7O0FBQ3pFO0VBQ0Usb0NBQW9DO0VBQ3BDO0lBR0UsZ0JBQWU7SUFDZixpQkFBZ0I7SUFDaEIsY0FBYTtJQUNiLFdBQVU7SUFDVixhQUFZO0lBQ1osaUJBQWdCLEVBRWpCO0VBQ0Q7SUFDRSxtQkFBa0I7SUFDbEIsa0JBQWlCO0lBQ2pCLGVBQWM7SUFDZCxhQUFZLEVBQ2Y7RUFDQztJQUNFLFdBQVUsRUFDWDtFQUVELDJCQUEyQjtFQUMzQjtJQUNFLFlBQVc7SUFDWCxtQkFBa0I7SUFDbEIsb0JBQW1CLEVBQ3BCO0VBRUQsc0RBQXNEO0VBQ3REO0lBQ0UsV0FBVTtJQUNWLDJCQUEwQjtJQUMxQiwrQkFBOEI7SUFDOUIsd0RBQXVELEVBQ3hEO0VBRUQsZ0RBQWdEO0VBQ2hEO0lBQ0UsV0FBVSxFQUNYO0VBRUQseURBQXlEO0VBQ3pEO0lBQ0UsU0FBUSxFQUNULEVBQUEiLCJmaWxlIjoic3JjL2FwcC9wcm9qZWN0LXRpbWVsaW5lL3Byb2plY3QtdGltZWxpbmUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0ICcuLi9nbG9iYWwuc2Nzcyc7XG5cbi5wb3J0Zm9saW8tYmcge1xuICAgIG1pbi1oZWlnaHQ6IDEwMHZoO1xuICAgIG1pbi13aWR0aDogMTAwdnc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG4ucHJvamVjdC1jb250YWluZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGZsZXgtd3JhcDogd3JhcDtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIHRyYW5zaXRpb246IGFsbCAwLjVzIGVhc2UtaW4tb3V0O1xuICAgIHBhZGRpbmctYm90dG9tOiAwcmVtO1xuICB9XG4gICNvdmVyZmxvd1Rlc3Qge1xuICAgIC8vIGJhY2tncm91bmQ6ICM0Q0FGNTA7XG4gICAgLy8gY29sb3I6IHdoaXRlO1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBtYXJnaW4tdG9wOiAzMHB4O1xuICAgIHBhZGRpbmc6IDE1cHg7XG4gICAgd2lkdGg6IDkwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgb3ZlcmZsb3c6IHNjcm9sbDtcbiAgICAvLyBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICB9XG5cbi50aW1lbGluZSB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIG1heC13aWR0aDogMTIwMHB4O1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGhlaWdodDogMjAwJTtcbn1cblxuLyogVGhlIGFjdHVhbCB0aW1lbGluZSAodGhlIHZlcnRpY2FsIHJ1bGVyKSAqL1xuLnRpbWVsaW5lOjphZnRlciB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiA2cHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgdG9wOiAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBsZWZ0OiA1MCU7XG4gICAgbWFyZ2luLWxlZnQ6IC0zcHg7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbn1cblxuLyogQ29udGFpbmVyIGFyb3VuZCBjb250ZW50ICovXG4uY29udGFpbmVyIHtcbiAgICBwYWRkaW5nOiAxMHB4IDQwcHg7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIGJhY2tncm91bmQtY29sb3I6IGluaGVyaXQ7XG4gICAgd2lkdGg6IDUwJTtcbn1cblxuLyogVGhlIGNpcmNsZXMgb24gdGhlIHRpbWVsaW5lICovXG4uY29udGFpbmVyOjphZnRlciB7XG4gICAgY29udGVudDogJyc7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiAyNXB4O1xuICAgIGhlaWdodDogMjVweDtcbiAgICByaWdodDogLTE3cHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgYm9yZGVyOiA0cHggc29saWQgcmVkO1xuICAgIHRvcDogMTVweDtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgei1pbmRleDogMTtcbn1cblxuLyogUGxhY2UgdGhlIGNvbnRhaW5lciB0byB0aGUgbGVmdCAqL1xuLmxlZnQge1xuICAgIGxlZnQ6IDA7XG59XG5cbi8qIFBsYWNlIHRoZSBjb250YWluZXIgdG8gdGhlIHJpZ2h0ICovXG4ucmlnaHQge1xuICAgIGxlZnQ6IDUwJTtcbn1cblxuLyogQWRkIGFycm93cyB0byB0aGUgbGVmdCBjb250YWluZXIgKHBvaW50aW5nIHJpZ2h0KSAqL1xuLmxlZnQ6OmJlZm9yZSB7XG4gICAgY29udGVudDogXCIgXCI7XG4gICAgaGVpZ2h0OiAwO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDIycHg7XG4gICAgd2lkdGg6IDA7XG4gICAgei1pbmRleDogMTtcbiAgICByaWdodDogMzBweDtcbiAgICBib3JkZXI6IG1lZGl1bSBzb2xpZCB3aGl0ZTtcbiAgICBib3JkZXItd2lkdGg6IDEwcHggMCAxMHB4IDEwcHg7XG4gICAgYm9yZGVyLWNvbG9yOiB0cmFuc3BhcmVudCB0cmFuc3BhcmVudCB0cmFuc3BhcmVudCB3aGl0ZTtcbn1cblxuLyogQWRkIGFycm93cyB0byB0aGUgcmlnaHQgY29udGFpbmVyIChwb2ludGluZyBsZWZ0KSAqL1xuLnJpZ2h0OjpiZWZvcmUge1xuICAgIGNvbnRlbnQ6IFwiIFwiO1xuICAgIGhlaWdodDogMDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAyMnB4O1xuICAgIHdpZHRoOiAwO1xuICAgIHotaW5kZXg6IDE7XG4gICAgbGVmdDogMzBweDtcbiAgICBib3JkZXI6IG1lZGl1bSBzb2xpZCB3aGl0ZTtcbiAgICBib3JkZXItd2lkdGg6IDEwcHggMTBweCAxMHB4IDA7XG4gICAgYm9yZGVyLWNvbG9yOiB0cmFuc3BhcmVudCB3aGl0ZSB0cmFuc3BhcmVudCB0cmFuc3BhcmVudDtcbn1cblxuLyogRml4IHRoZSBjaXJjbGUgZm9yIGNvbnRhaW5lcnMgb24gdGhlIHJpZ2h0IHNpZGUgKi9cbi5yaWdodDo6YWZ0ZXIge1xuICAgIGxlZnQ6IC0xNnB4O1xufVxuXG4vKiBUaGUgYWN0dWFsIGNvbnRlbnQgKi9cbi5jb250ZW50IHtcbiAgICBwYWRkaW5nOiAyMHB4IDMwcHg7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogJG9mZi13aGl0ZTtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgIGNvbG9yOiAkdGV4dC1jb2xvcjtcbiAgICBmb250LWZhbWlseTogJ1RpbWVzIE5ldyBSb21hbicsIFRpbWVzLCBzZXJpZjtcbiAgICBib3gtc2hhZG93OiAwLjEwcmVtIDAuMTByZW0gMC4xMHJlbSAwLjEwcmVtIHJlZDtcbn1cblxuLyogTWVkaWEgcXVlcmllcyAtIFJlc3BvbnNpdmUgdGltZWxpbmUgb24gc2NyZWVucyBsZXNzIHRoYW4gNjAwcHggd2lkZSAqL1xuQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNjAwcHgpIHtcbiAgLyogUGxhY2UgdGhlIHRpbWVsaW1lIHRvIHRoZSBsZWZ0ICovXG4gICNvdmVyZmxvd1Rlc3Qge1xuICAgIC8vIGJhY2tncm91bmQ6ICM0Q0FGNTA7XG4gICAgLy8gY29sb3I6IHdoaXRlO1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICBtYXJnaW4tdG9wOiAzMHB4O1xuICAgIHBhZGRpbmc6IDE1cHg7XG4gICAgd2lkdGg6IDkwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgb3ZlcmZsb3c6IHNjcm9sbDtcbiAgICAvLyBib3JkZXI6IDFweCBzb2xpZCAjY2NjO1xuICB9XG4gIC50aW1lbGluZSB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIG1heC13aWR0aDogMTIwMHB4O1xuICAgIG1hcmdpbjogMCBhdXRvO1xuICAgIGhlaWdodDogMjIwJTtcbn1cbiAgLnRpbWVsaW5lOjphZnRlciB7XG4gICAgbGVmdDogMzFweDtcbiAgfVxuICBcbiAgLyogRnVsbC13aWR0aCBjb250YWluZXJzICovXG4gIC5jb250YWluZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIHBhZGRpbmctbGVmdDogNzBweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiAyNXB4O1xuICB9XG4gIFxuICAvKiBNYWtlIHN1cmUgdGhhdCBhbGwgYXJyb3dzIGFyZSBwb2ludGluZyBsZWZ0d2FyZHMgKi9cbiAgLmNvbnRhaW5lcjo6YmVmb3JlIHtcbiAgICBsZWZ0OiA2MHB4O1xuICAgIGJvcmRlcjogbWVkaXVtIHNvbGlkIHdoaXRlO1xuICAgIGJvcmRlci13aWR0aDogMTBweCAxMHB4IDEwcHggMDtcbiAgICBib3JkZXItY29sb3I6IHRyYW5zcGFyZW50IHdoaXRlIHRyYW5zcGFyZW50IHRyYW5zcGFyZW50O1xuICB9XG5cbiAgLyogTWFrZSBzdXJlIGFsbCBjaXJjbGVzIGFyZSBhdCB0aGUgc2FtZSBzcG90ICovXG4gIC5sZWZ0OjphZnRlciwgLnJpZ2h0OjphZnRlciB7XG4gICAgbGVmdDogMTVweDtcbiAgfVxuICBcbiAgLyogTWFrZSBhbGwgcmlnaHQgY29udGFpbmVycyBiZWhhdmUgbGlrZSB0aGUgbGVmdCBvbmVzICovXG4gIC5yaWdodCB7XG4gICAgbGVmdDogMCU7XG4gIH1cbn0iLCIkYmctY29sb3I6ICMwODVlNzI7XG4vLyAjMTdhNTk4O1xuJGNvbG9yMTogI2U3NGMzYztcbiRjb2xvcjI6ICNkMmUxZGQ7XG4kY29sb3IzOiAjZGIzODFiO1xuJGdyZWVuOiAjMTdhNTk4O1xuLy8gJHRleHQtY29sb3I6ICNmZmZmZmY7XG4kYmxhY2s6ICM1NTU7XG4kb2ZmLXdoaXRlOiAjZThlZWVhO1xuJHRleHQtY29sb3I6IHJnYig3MywgMzksIDM5KTtcbi8vICM2OTk7XG4kd2hpdGU6ICNmZmY7XG4kY29sb3I0OiByZ2IoMjQ3LCAxNjgsIDE2OCk7XG4kY29sb3I1OiAjNTRhNGFmOyJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/project-timeline/project-timeline.component.ts":
+/*!****************************************************************!*\
+  !*** ./src/app/project-timeline/project-timeline.component.ts ***!
+  \****************************************************************/
+/*! exports provided: ProjectTimelineComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectTimelineComponent", function() { return ProjectTimelineComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ProjectTimelineComponent = /** @class */ (function () {
+    function ProjectTimelineComponent() {
+    }
+    ProjectTimelineComponent.prototype.ngOnInit = function () {
+    };
+    ProjectTimelineComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-project-timeline',
+            template: __webpack_require__(/*! ./project-timeline.component.html */ "./src/app/project-timeline/project-timeline.component.html"),
+            styles: [__webpack_require__(/*! ./project-timeline.component.scss */ "./src/app/project-timeline/project-timeline.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], ProjectTimelineComponent);
+    return ProjectTimelineComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/project/project.component.html":
 /*!************************************************!*\
   !*** ./src/app/project/project.component.html ***!
@@ -1322,7 +1360,7 @@ var ALL_PROJECT_DATA = getAllProject();
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div class=\"portfolio-bg\"> -->\n<div class=\"portfolio-bg\">\n<div class=\"project-container\">\n    <button [routerLink]=\"['/timeline']\" class=\"proj-timeline\">Check projects timeline ⌛</button>\n  <!-- <app-tags></app-tags> -->\n  <div *ngFor=\"let proj of projects.slice().reverse()\" class=\"project-card\">\n    <div class=\"card-outer\">\n      <span class=\"card card__front\">\n        <div class=\"card-container\">\n          <h4 class=\"card-header\">{{proj.name}}</h4>\n          <span class=\"image\"><img src={{proj.imageLink}}/></span>\n          <!-- <div>\n            <p class=\"card-short-details\" >\n              {{proj.description}}\n            </p>\n          </div> -->\n          <div class=\"card-short-details\">\n              {{proj.description}}\n              <div class=\"tech-stuff-details\">\n                <br>\n                <span>What I learned: </span>\n                <p>{{proj.features}}</p>\n                <br><br>\n                <span>Tech Stuff: </span>\n                <br>\n                <p>{{proj.techStuff}} </p>\n              </div>\n            </div>\n        </div>\n      </span>\n      \n  </div>\n</div>\n</div>\n</div>\n \n\n\n"
+module.exports = "<!-- <div class=\"portfolio-bg\"> -->\n<div class=\"portfolio-bg\">\n<div class=\"project-container\">\n    <button [routerLink]=\"['/timeline']\" class=\"proj-timeline\" (click)=\"sendEvent('ProjectTimeline')\">Check projects timeline ⌛</button>\n  <!-- <app-tags></app-tags> -->\n  <div *ngFor=\"let proj of projects.slice().reverse()\" class=\"project-card\">\n    <div class=\"card-outer\">\n      <span class=\"card card__front\">\n        <div class=\"card-container\">\n          <h4 class=\"card-header\">{{proj.name}}</h4>\n          <span class=\"image\"><img src={{proj.imageLink}}/></span>\n          <!-- <div>\n            <p class=\"card-short-details\" >\n              {{proj.description}}\n            </p>\n          </div> -->\n          <div class=\"card-short-details\">\n              {{proj.description}}\n              <div class=\"tech-stuff-details\">\n                <br>\n                <span>What I learned: </span>\n                <p> {{proj.features}}</p>\n                <br><br>\n                <span>Tech Stuff: </span>\n                <br>\n                <p> {{proj.techStuff}} </p>\n              </div>\n            </div>\n        </div>\n      </span>\n      \n  </div>\n</div>\n</div>\n</div>\n \n\n\n"
 
 /***/ }),
 
@@ -1369,6 +1407,14 @@ var ProjectComponent = /** @class */ (function () {
         this.projectService = projectService;
         this.router = router;
         this.setFixedPostion = false;
+        this.sendEvent = function (action) {
+            window.ga('send', 'event', {
+                eventCategory: action,
+                eventLabel: action,
+                eventAction: action,
+                eventValue: 10
+            });
+        };
     }
     ProjectComponent.prototype.ngOnInit = function () {
         console.log('project component created');
